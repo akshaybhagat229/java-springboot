@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mysqlserver:
+    container_name: sql-container
+    image: mysql
+    ports:
+      -"3306:3306"
+    environment:
+      MYSQL_DATABASE: MYDB 
+      MYSQL_ROOT_PASSWORD: root 
+  springbootservice: 
+    container_name: springbootapp 
+    build: 
+      context: ./
+      dockerfile: Dockerfile 
+    ports:
+      -"8080:8080"
+    depends_on:
+      - mysqlserver
